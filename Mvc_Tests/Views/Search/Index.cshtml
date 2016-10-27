@@ -1,0 +1,57 @@
+﻿@model ICollection<Mvc_Tests.Models.Person>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/scripts/jquery-1.10.2.js"></script>
+<h2>Index</h2>
+@{ 
+    var perInfo = ViewBag.data;
+}
+
+<div>
+    <div style="display:inline-block">
+        @using (Html.BeginForm()) {
+            <p>
+                <input type="text" name="search_input" value="" />
+                <input type="submit" name="btn_search" id="btn_search" value="Search" />
+            </p>
+        }
+    </div>
+    <div style="display:inline-block">
+        <button id="btn_clear">Clear</button>
+    </div>
+</div>
+
+@if (ViewBag.flag == true) {
+    <div class="display">
+        @foreach (var item in Model) {
+            if (item.gender == "F") {
+                <div class="col-md-3" style="border:1px solid; border-color:blue; border-collapse:">            
+                    @Html.DisplayFor(modelItem => item.id) <br />
+                    @Html.DisplayFor(modelItem => item.name) <br />
+                    @Html.DisplayFor(modelItem => item.email) <br />
+                    @Html.DisplayFor(modelItem => item.gender) <br />           
+                    @Html.DisplayFor(modelItem => item.city) <br />   
+                </div>
+            }
+            else {
+                <div class="col-md-3" style="border:1px solid;border-color:gold; border-collapse:collapse">
+                    @Html.DisplayFor(modelItem => item.id) <br />
+                    @Html.DisplayFor(modelItem => item.name) <br />
+                    @Html.DisplayFor(modelItem => item.email) <br />
+                    @Html.DisplayFor(modelItem => item.gender) <br />
+                    @Html.DisplayFor(modelItem => item.city) <br />  
+                </div>
+            }
+        }
+    </div>
+}
+
+    <script>
+        $(document).ready(function () {
+            $("#btn_clear").on('click', function () {
+                $(".display").empty();
+            })
+        });
+    </script>
